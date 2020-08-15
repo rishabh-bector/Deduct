@@ -42,7 +42,7 @@ Notice how our drone moved forward 4 spaces! This is because we told our drone t
 
 Here are a few keyboard shortcuts which will help you along the way:
 
-`Escape` - Exit to level selection screen
+`Escape` - Exit to level selection screen  
 `Shift` + `Backspace` - Clear all slots of whichever function is being selected
 
 You now have the tools needed to become a true DIGICODE master. Have fun solving all the levels! 
