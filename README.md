@@ -6,7 +6,7 @@ This is a 64x64 programming game made for [LowRezJam 2020](https://itch.io/jam/l
 
 ## Getting Started
 
-Once you pass the main menu and select the first level, you'll see the following advanced mission command system:
+Once you pass the main menu (click arrow) and select the first level (click exclamation mark), you'll see the following advanced mission command system:
 
 ![](https://github.com/rishabh-bector/Digicode/blob/master/Assets/Screenshots/full.png)
 
