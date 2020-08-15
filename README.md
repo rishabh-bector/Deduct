@@ -14,7 +14,7 @@ This is DIGICODE. The mostly-empty larger view under the rows of slots shows the
 
 ![](https://github.com/rishabh-bector/Digicode/blob/master/Assets/Screenshots/map.png)
 
-You can see our drone in the middle-left of the image above (the square with 2 colors), as well as the darker path leading to the light green target, which is to the upper-right. Your task is to guide the drone to the target. However, you are a highly intelligent being, with highly abstract tools. The top view display shows your controls:
+In the middle-left of the image above is our drone (the square with 2 colors). There is also a dark path leading to the light green target. Your task is to guide the drone to the target. However, you are a highly intelligent being, with highly abstract tools. The top view display shows your controls:
 
 ![](https://github.com/rishabh-bector/Digicode/blob/master/Assets/Screenshots/control.png)
   
@@ -32,7 +32,7 @@ When you see the instruction menu pop up, click the blue square which will inser
 
 ## About Functions
 
-Scores in DIGICODE are calculated by subtracting the number of instructions placed by the player from the max number of slots available. This means that in order to get the best score, you must use as _few_ instructions as possible. Functions are an easy way to reuse instructions. Opening up the instruction menu, we see that 4 of the available instructions match the colors of 4 of the functions (excluding the main one). When building your programs, placing down an instruction which corresponds to a function will simply run _all_ of the instructions in that function. To try it, write and run this program:
+Scores in DIGICODE are calculated by subtracting the number of instructions placed by the player from the max number of slots available. This means that in order to get the best score, you must use as _few_ instructions as possible. Functions are an easy way to reuse a set of instructions. In the instruction menu, we can see that 4 of the available instructions match the colors of 4 of the functions. When building your programs, placing down an instruction which corresponds to a function will simply run _all_ of the instructions in that function. To try it, write and run this program:
 
 ![](https://github.com/rishabh-bector/Digicode/blob/master/Assets/Screenshots/functionprog.png)
   
