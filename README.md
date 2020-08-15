@@ -14,7 +14,7 @@ This is DIGICODE. The mostly-empty larger view under the rows of slots shows the
 
 ![](https://github.com/rishabh-bector/Digicode/blob/master/Assets/Screenshots/map.png)
 
-In the middle-left of the image above is our drone (the square with 2 colors). There is also a dark path leading to the light green target. Your task is to guide the drone to the target. However, you are a highly intelligent being, with highly abstract tools. The top view display shows your controls:
+In the middle-left of the image above is our drone (the square with 2 colors). There is also a dark path leading to the light green target. Your task is to guide the drone to the target. However, you are a highly intelligent being, with highly abstract tools. The top display shows your controls:
 
 ![](https://github.com/rishabh-bector/Digicode/blob/master/Assets/Screenshots/control.png)
   
