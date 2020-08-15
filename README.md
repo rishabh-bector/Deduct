@@ -22,4 +22,16 @@ And each 3x5 color-coded group of slots is a _function_. Each function contains 
   
 The first three (blue, grey, and green) are for basic movement. Blue will move the drone forward, grey will turn left, and green will turn right. Let's try it out! Click the very first slot, which is in the topmost left of the first function (black). This is the _main_ function, and all the instructions inside of it are run from left-to-right, row-by-row when you hit the start button. 
 
-When you see the instruction menu pop up, click the blue square which will insert the "move forward" instruction into the first slot of function 1. Once you hit start, the drone will move forward in the upward direction, since it is currently facing up. Try it now! The start button is the green one between the function view and the map view. Next to it is the stop button, which will stop your program and reset the drone. 
+When you see the instruction menu pop up, click the blue square which will insert the "move forward" instruction into the first slot of function 1. Once you hit start, the drone will move forward in the upward direction, since it is currently facing up. Try it now! The start button is the green one between the function view and the map view. Next to it is the stop button, which will stop your program and reset the drone. Continue to add instructions until you complete the level by reaching the target.
+
+## About Functions
+
+Scores in DIGICODE are calculated by subtracting the number of instructions placed by the player from the max number of slots available. This means that in order to get the best score, you must use as _few_ instructions as possible. Functions are an easy way to reuse instructions. Opening up the instruction menu, we see that 4 of the available instructions match the colors of 4 of the functions (excluding the main one). When building your programs, placing down an instruction which corresponds to a function will simply run _all_ of the instructions in that function. To try it, write and run this program:
+
+<function program>
+  
+Notice how our drone moved forward 4 spaces! This is because we told our drone to simply "run the purple function twice", and we've also told our drone that the purple function consists of 2 "move forward" instructions. Combining functions and instructions like this can allow us to program complex drone paths with just a handlful of instructions.
+
+## Goodbye
+
+You now have the tools needed to become a true DIGICODE master. Have fun solving all the levels! 
