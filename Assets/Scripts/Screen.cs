@@ -17,7 +17,7 @@ public class Screen : MonoBehaviour {
         if (pixels != null && pixels.Count > 0) {
             for (int x = 0; x < 64; x++) {
                 for (int y = 0; y < 64; y++) {
-                    Object.Destroy(pixels[x][y]);
+                    Destroy(pixels[x][y]);
                 }
             }
             pixels.Clear();
@@ -84,7 +84,7 @@ public class Screen : MonoBehaviour {
 
     public void SetPixelParent(int x, int y, int xTag, int yTag, PixelParent parent) {
         if (x < 0 || x > 63 || y < 0 || y > 63) return;
-        if (PixelAt(x, y).GetComponent<Pixel>().x != -1) return;
+        // if (PixelAt(x, y).GetComponent<Pixel>().x != -1) return;
         PixelAt(x, y).GetComponent<Pixel>().SetParent(parent);
         PixelAt(x, y).GetComponent<Pixel>().SetPos(xTag, yTag);
     }

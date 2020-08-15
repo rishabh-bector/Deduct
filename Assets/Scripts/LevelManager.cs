@@ -45,8 +45,8 @@ public class LevelManager : MonoBehaviour, PixelParent {
 
     public void Save() {
         string marshaled = JsonUtility.ToJson(levelContainer, true);
-        System.IO.File.WriteAllText(Application.persistentDataPath + "/levels.json", marshaled);
-        Debug.Log("Saved to: " + Application.persistentDataPath + "/levels.json");
+        System.IO.File.WriteAllText(Application.dataPath + "/levels.json", marshaled);
+        Debug.Log("Saved to: " + Application.dataPath + "/levels.json");
     }
 
     public Level Get(int i) {
@@ -70,7 +70,7 @@ public class LevelManager : MonoBehaviour, PixelParent {
         return level;
     }
 
-    public void BuildToScreen(int level) {
+    public void BuildToScreen(int level, bool leavePaths) {
         currentLevel = level;
         Level L = Get(level);
         player.currentDir = (Dir)L.startDir;
@@ -80,6 +80,7 @@ public class LevelManager : MonoBehaviour, PixelParent {
         
         for (int x = 0; x < 32; x++) {
             for (int y = 0; y < 22; y++) {
+                if (leavePaths && screen.PixelAt(x * 2, y * 2).GetComponent<Pixel>().GetColor() == player.gamePathColor) continue;
                 if (L.GetTile(x, y) == -1) {
                     player.BuildToScreen(x, y);
                     continue;
@@ -103,6 +104,7 @@ public class LevelManager : MonoBehaviour, PixelParent {
             levelContainer.levels[currentLevel + 1].unlocked = true;
         }
         board.TransitionToSuccessState();
+        playerSelector.Reset();
     }
 
     private void Start() {
@@ -115,10 +117,10 @@ public class LevelManager : MonoBehaviour, PixelParent {
             levels = new List<Level>()
         };
         try {
-            string marshaled = System.IO.File.ReadAllText(Application.persistentDataPath + "/levels.json");
+            string marshaled = System.IO.File.ReadAllText(Application.dataPath + "/levels.json");
             if (marshaled.Length == 0) throw new Exception("Level file corrupt, rebuilding...");
             levelContainer = JsonUtility.FromJson<LevelSerial>(marshaled);
-            Debug.Log("Read from: " + Application.persistentDataPath + "/levels.json");
+            Debug.Log("Read from: " + Application.dataPath + "/levels.json");
             Debug.Log("Found: " + levelContainer.levels.Count + " levels");
         } catch (Exception e) {
             Debug.Log("Read json failed: " + e.ToString());
@@ -153,7 +155,7 @@ public class LevelManager : MonoBehaviour, PixelParent {
             if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.N)) {
                 CreateEmpty();
                 currentLevel++;
-                BuildToScreen(currentLevel);
+                BuildToScreen(currentLevel, false);
             }
         }
     }
@@ -174,7 +176,7 @@ public class LevelManager : MonoBehaviour, PixelParent {
                 levelContainer.levels[currentLevel].SetTile(hoveredTile.Item1, hoveredTile.Item2, tile);
             }
 
-            BuildToScreen(currentLevel);
+            BuildToScreen(currentLevel, true);
             levelContainer.levels[currentLevel].startDir = (int)player.currentDir;
         }
         if (Input.GetKeyDown(KeyCode.R)) {
@@ -207,12 +209,12 @@ public class LevelManager : MonoBehaviour, PixelParent {
     public void OnPixelMouseDown(int x, int y) {
         if (state == State.Play) {
             if (x == -10 && !lockStart) {
-                BuildToScreen(currentLevel);
+                BuildToScreen(currentLevel, false);
                 player.Play(levelContainer.levels[currentLevel]);
             }
             if (x == -11 && !lockStart) {
                 player.Stop();
-                BuildToScreen(currentLevel);
+                BuildToScreen(currentLevel, false);
             }
         }
     }
@@ -229,7 +231,8 @@ public class Level {
     private int[] tiles;
 
     public Level(int width, int height) {
-        unlocked = false;
+        unlocked = true;
+        complete = false;
         tiles = new int[width * height];
         for (int i = 0; i < tiles.Length; i++) {
             tiles[i] = 0;

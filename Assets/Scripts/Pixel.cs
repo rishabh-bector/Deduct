@@ -22,6 +22,8 @@ public class Pixel : MonoBehaviour {
     private int oldY = -1;
     private List<Color> previousColors = new List<Color>();
 
+    public Color GetColor() { return sprite.color; }
+
     public void SetColor(Color col) {
         if (previousColors.Count > 0) previousColors.Add(sprite.color);
         else previousColors.Add(col);

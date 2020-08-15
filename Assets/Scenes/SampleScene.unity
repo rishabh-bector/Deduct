@@ -201,6 +201,7 @@ MonoBehaviour:
   githubSelector: {fileID: 226750995}
   mainLevelSelector: {fileID: 226750996}
   secondaryLevelSelector: {fileID: 226750997}
+  functionSelector: {fileID: 226750988}
   dashEffect: {fileID: 226750994}
 --- !u!4 &226750979
 Transform:
@@ -340,12 +341,13 @@ MonoBehaviour:
   menuBorderColor: {r: 0.5803922, g: 0.6901961, b: 0.7607843, a: 1}
   menuBackgroundColor: {r: 0.101960786, g: 0.10980392, b: 0.17254902, a: 1}
   forwardColor: {r: 0.23137255, g: 0.3647059, b: 0.7882353, a: 1}
-  rightColor: {r: 0.21960784, g: 0.7176471, b: 0.39215687, a: 1}
-  leftColor: {r: 0.5803922, g: 0.6901961, b: 0.7607843, a: 1}
+  rightColor: {r: 0.5803922, g: 0.6901961, b: 0.7607843, a: 1}
+  leftColor: {r: 0.21960784, g: 0.7176471, b: 0.39215687, a: 1}
   screen: {fileID: 226750980}
   selector: {fileID: 226750989}
   levelManager: {fileID: 226750986}
-  instructions: 000000000200000001000000
+  board: {fileID: 226750978}
+  numInstructions: 7
   lastXPos: -1
   parent: {fileID: 0}
 --- !u!114 &226750988
@@ -724,7 +726,7 @@ MonoBehaviour:
   gamePlayerColor1: {r: 0.95686275, g: 0.95686275, b: 0.95686275, a: 1}
   gamePlayerColor2: {r: 0.5803922, g: 0.6901961, b: 0.7607843, a: 1}
   gamePathColor: {r: 0.3372549, g: 0.42352942, b: 0.5254902, a: 1}
-  playFrameSpeed: 20
+  playFrameSpeed: 10
   screen: {fileID: 226750980}
   board: {fileID: 226750978}
   levelManager: {fileID: 226750986}

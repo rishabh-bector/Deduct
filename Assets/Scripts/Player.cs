@@ -5,6 +5,10 @@ public enum Instructions {
     Forward,
     TurnRight,
     TurnLeft,
+    Function2,
+    Function3,
+    Function4,
+    Function5,
     None,
 }
 
@@ -39,6 +43,7 @@ public class Player : MonoBehaviour {
     private bool playing = false;
     private int playFrame = 0;
     private List<List<Instructions>> instructions;
+    private List<Instructions> currentStack;
     private int currentInstruction;
 
     public void BuildToScreen(int x, int y) {
@@ -111,35 +116,42 @@ public class Player : MonoBehaviour {
     }
 
     public void Play(Level level) {
-        currentLevel = level;
+        // Initialize level details
         for (int x = 0; x < 32; x++) {
             for (int y = 0; y < 22; y++) {
                 if (level.GetTile(x, y) == 2) goal = (x, y);
             }
         }
+        currentLevel = level;
         currentDir = (Dir)level.startDir;
         instructions = board.BuildInstructionList();
+
+        // Initialize stack
+        currentStack = new List<Instructions>();
+        currentStack.AddRange(instructions[0]);
         currentInstruction = 0;
+
+        // Begin playing
         Debug.Log("Beginning instruction sequence:");
-        for (int i = 0; i < instructions[0].Count; i++) {
-            Debug.Log("#" + i + ": " + instructions[0][i]);
-        }
         playing = true;
     }
 
     public void ProcessNextInstruction() {
+        // Check end conditions
         if (currentPos == goal) {
             Stop();
             levelManager.LevelComplete();
             board.TransitionToSuccessState();
         }
 
-        if (currentInstruction >= instructions[0].Count) {
+        if (currentInstruction >= currentStack.Count) {
             Stop();
             return;
         }
-        Debug.Log("Processing " + instructions[0][currentInstruction]);
-        switch (instructions[0][currentInstruction]) {
+
+        // Process next instruction
+        Debug.Log("Processing " + currentInstruction + " " + currentStack[currentInstruction]);
+        switch (currentStack[currentInstruction]) {
             case Instructions.Forward:
                 InstructForward();
                 break;
@@ -149,9 +161,26 @@ public class Player : MonoBehaviour {
             case Instructions.TurnRight:
                 InstructTurnRight();
                 break;
+            case Instructions.Function2:
+                InstructPushStack(instructions[1]);
+                break;
+            case Instructions.Function3:
+                InstructPushStack(instructions[2]);
+                break;
+            case Instructions.Function4:
+                InstructPushStack(instructions[3]);
+                break;
+            case Instructions.Function5:
+                InstructPushStack(instructions[4]);
+                break;
         }
         BuildToScreen(currentPos.Item1, currentPos.Item2);
         currentInstruction++;
+    }
+
+    public void InstructPushStack(List<Instructions> func) {
+        currentStack.InsertRange(currentInstruction+1, func);
+        PrintStack();
     }
 
     public void Stop() {
@@ -182,10 +211,18 @@ public class Player : MonoBehaviour {
 
     public void InstructTurnRight() {
         Rotate();
+        Rotate();
+        Rotate();
     }
     public void InstructTurnLeft() {
         Rotate();
-        Rotate();
-        Rotate();
+    }
+
+    public void PrintStack() {
+        string O = "";
+        currentStack.ForEach(delegate (Instructions i) {
+            O += i + " ";
+        });
+        Debug.Log(O);
     }
 }

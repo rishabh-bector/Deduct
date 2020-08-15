@@ -14,28 +14,30 @@ public class InstructionMenu : MonoBehaviour, PixelParent {
     public Screen screen;
     public Selector selector;
     public LevelManager levelManager;
+    public Board board;
 
     // State
-    public Instructions[] instructions = {
-        Instructions.Forward,
-        Instructions.TurnLeft,
-        Instructions.TurnRight,
-    };
-
+    public int numInstructions = 7;
     public int lastXPos = -1;
     public Function parent;
     public Dictionary<Instructions, Color> instColors;
 
     private List<(int, int)> oldSet;
     private List<(int, int)> oldParent;
-    
+
     private void Start() {
         oldSet = new List<(int, int)>();
         oldParent = new List<(int, int)>();
         instColors = new Dictionary<Instructions, Color>();
+
+        // Instruction -> color mapping
         instColors.Add(Instructions.Forward, forwardColor);
         instColors.Add(Instructions.TurnLeft, leftColor);
         instColors.Add(Instructions.TurnRight, rightColor);
+        instColors.Add(Instructions.Function2, board.f2Color);
+        instColors.Add(Instructions.Function3, board.f3Color);
+        instColors.Add(Instructions.Function4, board.f4Color);
+        instColors.Add(Instructions.Function5, board.f5Color);
     }
 
     public void DestroySetMenu() {
@@ -85,9 +87,9 @@ public class InstructionMenu : MonoBehaviour, PixelParent {
         // Build set instructions
         levelManager.LockButtons();
         int row = yTop - 2;
-        for (int i = 0; i < instructions.Length; i++) {
+        for (int i = 0; i < numInstructions; i++) {
             int xPos = (i % 3) * 3;
-            Color col = instColors[instructions[i]];
+            Color col = instColors[(Instructions)i];
 
             screen.SetPixelColor(x + xPos, row, col);
             screen.SetPixelColor(x + xPos + 1, row, col);
@@ -98,6 +100,8 @@ public class InstructionMenu : MonoBehaviour, PixelParent {
             screen.SetPixelParent(x + xPos + 1, row, i, 0, this);
             screen.SetPixelParent(x + xPos, row - 1, i, 0, this);
             screen.SetPixelParent(x + xPos + 1, row - 1, i, 0, this);
+
+            Debug.Log("Set parent for " + i + " at " + x + xPos + " " + row);
 
             oldSet.Add((x + xPos, row));
             oldSet.Add((x + xPos + 1, row));
@@ -126,6 +130,6 @@ public class InstructionMenu : MonoBehaviour, PixelParent {
     public void OnPixelMouseExit(int x, int y) { }
 
     public void OnPixelMouseDown(int x, int y) {
-        parent.OnInstructionSelect(instructions[x]);
+        parent.OnInstructionSelect((Instructions)x);
     }
 }

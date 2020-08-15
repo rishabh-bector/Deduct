@@ -63,4 +63,13 @@ public class Selector : MonoBehaviour {
         oldSelectX = x;
         oldSelectY = y;
     }
+
+    public void Reset() {
+        selectX = -1;
+        selectY = -1;
+        oldSelectX = -1;
+        oldSelectY = -1;
+        oldSelect = new List<(int, int)>();
+        locked = false;
+    }
 }

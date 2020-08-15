@@ -10,6 +10,7 @@ public class Function : MonoBehaviour, PixelParent {
     // State
     private int functionX;
     private List<Instructions> instructions;
+    private Color viewBackgroundColor;
 
     private void Start() {
         instructions = new List<Instructions>();
@@ -18,15 +19,32 @@ public class Function : MonoBehaviour, PixelParent {
         }
     }
 
+    private void FixedUpdate() {
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Backspace)) {
+            Debug.Log("Clearing function!");
+            instructions = new List<Instructions>();
+            for (int i = 0; i < 15; i++) {
+                instructions.Add(Instructions.None);
+            }
+            BuildSlots();
+        }
+    }
+
     public void Build(int x, Color color, Color viewBackgroundColor) {
         functionX = x;
-        int instInd = 0;
+        this.viewBackgroundColor = viewBackgroundColor;
         for (int x0 = 0; x0 < 8; x0++) {
             // Colored bars
             screen.SetPixelColor(x + x0, 63, color);
             screen.SetPixelColor(x + x0, 63 - 15, color);
         }
 
+        BuildSlots();
+    }
+
+    public void BuildSlots() {
+        int instInd = 0;
+        int x = functionX;
         for (int y = 62; y > 62 - 14; y -= 3) {
             for (int x0 = 0; x0 < 8; x0++) {
                 if (x0 != 2 && x0 != 5 && x0 != 8) {
@@ -65,6 +83,7 @@ public class Function : MonoBehaviour, PixelParent {
             selector.Unlock();
             instructionMenu.BuildSetMenu(functionX, this);
             selector.BuildSelector(x, y);
+            selector.Lock();
             return;
         }
         instructionMenu.BuildSetMenu(functionX, this);
@@ -86,11 +105,22 @@ public class Function : MonoBehaviour, PixelParent {
         Debug.Log("Inserted " + i + " into slot " + instInd);
         instructions[instInd] = i;
 
+
+        // Auto move to next slot for convenience
         selector.Unlock();
-        instructionMenu.BuildSetMenu(functionX, this);
+        (int, int) oldPos = (selector.selectX, selector.selectY);
+        if (oldPos.Item1 - functionX < 6) selector.BuildSelector(oldPos.Item1 + 3, oldPos.Item2);
+        else {
+            selector.BuildSelector(functionX, oldPos.Item2 - 3);
+        }
+        selector.Lock();
     }
 
     public List<Instructions> GetInstructionList() {
-        return instructions;
+        List<Instructions> returnList = new List<Instructions>();
+        instructions.ForEach(delegate (Instructions i) {
+            if (i != Instructions.None) returnList.Add(i);
+        });
+        return returnList;
     }
 }

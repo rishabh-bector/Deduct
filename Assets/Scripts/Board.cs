@@ -37,6 +37,7 @@ public class Board : MonoBehaviour, PixelParent {
     public Selector githubSelector;
     public Selector mainLevelSelector;
     public Selector secondaryLevelSelector;
+    public Selector functionSelector;
     public DashEffect dashEffect;
 
     // State
@@ -143,7 +144,7 @@ public class Board : MonoBehaviour, PixelParent {
         }
 
         BuildButtons();
-        levelManager.BuildToScreen(levelSelect);
+        levelManager.BuildToScreen(levelSelect, false);
     }
 
     private void BuildButtons() {
@@ -215,7 +216,7 @@ public class Board : MonoBehaviour, PixelParent {
         }
 
         if (x == 55 && y == 37) {
-            if (levelManager.Get(levelSelect + 1).unlocked) levelSelect++;
+            if (levelManager.Get(levelSelect + 1) != null) if (levelManager.Get(levelSelect + 1).unlocked) levelSelect++;
             if (levelSelect > 10) levelSelect = 10;
             BuildLevelBar();
         }
@@ -233,17 +234,19 @@ public class Board : MonoBehaviour, PixelParent {
     public void TransitionToLevelState() {
         screen.Init();
         dashEffect.STOP();
+        functionSelector.Reset();
         BuildLevelView();
-        audioManager.FadeOutSource();
     }
 
     public void TransitionToGameState() {
         screen.Init();
         BuildGame();
+        audioManager.FadeOutSource();
     }
 
     public void TransitionToTitleState() {
         screen.Init();
+        functionSelector.Reset();
         dashEffect.START();
         BuildTitle();
     }

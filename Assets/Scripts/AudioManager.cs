@@ -29,6 +29,6 @@ public class AudioManager : MonoBehaviour
     }
 
     public void StartSlow() {
-        slowSource.PlayOneShot(first);
+        // if (!slowSource.isPlaying) slowSource.PlayOneShot(first);
     }
 }
