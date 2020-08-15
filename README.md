@@ -22,7 +22,7 @@ And each 3x5 color-coded group of slots is a _function_. Each function contains 
   
 The first three (blue, grey, and green) are for basic movement. Blue will move the drone forward, grey will turn left, and green will turn right. Let's try it out! Click the very first slot, which is in the topmost left of the first function (black). This is the _main_ function, and all the instructions inside of it are run from left-to-right, row-by-row when you hit the start button. 
 
-When you see the instruction menu pop up, click the blue square which will insert the "move forward" instruction into the first slot of function 1. Once you hit start, the drone will move forward in the upward direction, since it is currently facing up. Try it now! The start button is the green one between the function view and the map view. Next to it is the stop button, which will stop your program and reset the drone. Continue to add instructions until you complete the level by reaching the target.
+When you see the instruction menu pop up, click the blue square which will insert the "move forward" instruction into the first slot of function 1. Once you hit start, the drone will move forward in the upward direction, since it is currently facing up. Try it now! The start button is the green one between the function view and the map view. Next to it is the stop button, which will stop your program and reset the drone. Now just continue to add instructions until you complete the level by reaching the target!
 
 ## About Functions
 
