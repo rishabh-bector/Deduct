@@ -10,15 +10,15 @@ Once you pass the main menu (click the arrow) and select the first level (click 
 
 ![](https://github.com/rishabh-bector/Digicode/blob/master/Assets/Screenshots/full.png)
 
-This is DIGICODE. The mostly-empty larger view under the rows of slots shows the map:
+This is DIGICODE. The mostly-empty larger view under the rows of slots shows the map. In the middle-left of the map shown below is our drone (the square with 2 colors). There is also a dark path leading to the light green target. 
 
 ![](https://github.com/rishabh-bector/Digicode/blob/master/Assets/Screenshots/map.png)
 
-In the middle-left of the image above is our drone (the square with 2 colors). There is also a dark path leading to the light green target. Your task is to guide the drone to the target. However, you are a highly intelligent being, with highly abstract tools. The top display shows your controls:
+Your task is to guide the drone to the target. However, you are a highly intelligent being, with highly abstract tools. The top display shows your controls:
 
 ![](https://github.com/rishabh-bector/Digicode/blob/master/Assets/Screenshots/control.png)
   
-And each 3x5 color-coded group of slots is a _function_. Each function contains 15 slots, and each slot can hold 1 instruction. As you can see, you have 5 functions available to you. The start button is the green one. Next to it is the stop button, which will stop your program and reset the drone. Your task is to guide your drone to the target by placing instructions into these slots. Clicking on a slot will open the instruction menu, which displays all available instructions:
+Each 3x5 color-coded group of slots is a _function_. Each function contains 15 slots, and each slot can hold 1 instruction. As you can see, you have 5 functions available to you. The start button is the green one. Next to it is the stop button, which will stop your program and reset the drone. Your task is to guide your drone to the target by placing instructions into these slots. Clicking on a slot will open the instruction menu, which displays all available instructions:
 
 ![](https://github.com/rishabh-bector/Digicode/blob/master/Assets/Screenshots/instructionmenu.png)
   
@@ -38,6 +38,6 @@ Scores in DIGICODE are calculated by subtracting the number of instructions plac
   
 Notice how our drone moved forward 4 spaces! This is because we told our drone to simply "run the purple function twice", and we've also told our drone that the purple function consists of 2 "move forward" instructions. Combining functions and instructions like this can allow us to program complex drone paths with just a handful of instructions.
 
-## Goodbye
+## Begin
 
 You now have the tools needed to become a true DIGICODE master. Have fun solving all the levels! 
