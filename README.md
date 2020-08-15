@@ -32,12 +32,17 @@ When you see the instruction menu pop up, click the blue square which will inser
 
 ## About Functions
 
-Scores in DIGICODE are calculated by subtracting the number of instructions placed by the player from the max number of slots available. This means that in order to get the best score, you must use as _few_ instructions as possible. Functions are an easy way to reuse a set of instructions. In the instruction menu, we can see that 4 of the available instructions match the colors of 4 of the functions. When building your programs, placing down an instruction which corresponds to a function will simply run _all_ of the instructions in that function. To try it, write and run this program:
+Your score for a level in DIGICODE is equal to the number of instructions you placed to complete it. Lower scores are better, so you must use as _few_ instructions as possible. Functions are an easy way to reuse a set of instructions. In the instruction menu, we can see that 4 of the available instructions match the colors of 4 of the functions. When building your programs, placing down an instruction which corresponds to a function will simply run _all_ of the instructions in that function. To try it, write and run this program:
 
 ![](https://github.com/rishabh-bector/Digicode/blob/master/Assets/Screenshots/functionprog.png)
   
 Notice how our drone moved forward 4 spaces! This is because we told our drone to simply "run the purple function twice", and we've also told our drone that the purple function consists of 2 "move forward" instructions. Combining functions and instructions like this can allow us to program complex drone paths with just a handful of instructions.
 
 ## Begin
+
+Here are a few keyboard shortcuts which will help you along the way:
+
+`Escape` - Exit to level selection screen
+`Shift` + `Backspace` - Clear all slots of whichever function is being selected
 
 You now have the tools needed to become a true DIGICODE master. Have fun solving all the levels! 
