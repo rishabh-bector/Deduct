@@ -36,7 +36,7 @@ Your score for a level in DIGICODE is equal to the number of instructions you pl
 
 ![](https://github.com/rishabh-bector/Digicode/blob/master/Assets/Screenshots/functionprog.png)
   
-Notice how our drone moved forward 4 spaces! This is because we told our drone to simply "run the purple function twice", and we've also told our drone that the purple function consists of 2 "move forward" instructions. Combining functions and instructions like this can allow us to program complex drone paths with just a handful of instructions.
+Notice how our drone moved forward 4 spaces. This is because we told our drone to simply "run the purple function twice", and we've also told our drone that the purple function consists of 2 "move forward" instructions. Combining functions and instructions like this can allow us to program complex drone paths with just a handful of instructions.
 
 ## Begin
 
