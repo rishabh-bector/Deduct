@@ -81,6 +81,7 @@ public class Player : MonoBehaviour {
         currentPixels.ForEach(delegate ((int, int) pixel) {
             screen.RevertPixel(pixel.Item1, pixel.Item2);
         });
+        currentPixels.Clear();
         firstRun = false;
     }
 

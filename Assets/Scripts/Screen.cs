@@ -5,12 +5,41 @@ using UnityEngine;
 public class Screen : MonoBehaviour {
     // References
     public GameObject pixelPrefab;
+    public Texture2D digit0;
+    public Texture2D digit1;
+    public Texture2D digit2;
+    public Texture2D digit3;
+    public Texture2D digit4;
+    public Texture2D digit5;
+    public Texture2D digit6;
+    public Texture2D digit7;
+    public Texture2D digit8;
+    public Texture2D digit9;
+    public Dictionary<char, Texture2D> digitToTexture;
 
     // State
     private List<List<GameObject>> pixels;
 
     public GameObject PixelAt(int x, int y) {
         return pixels[x][y];
+    }
+
+    private void Start() {
+        SetupDigitArray();
+    }
+
+    private void SetupDigitArray() {
+        digitToTexture = new Dictionary<char, Texture2D>();
+        digitToTexture.Add('0', digit0);
+        digitToTexture.Add('1', digit1);
+        digitToTexture.Add('2', digit2);
+        digitToTexture.Add('3', digit3);
+        digitToTexture.Add('4', digit4);
+        digitToTexture.Add('5', digit5);
+        digitToTexture.Add('6', digit6);
+        digitToTexture.Add('7', digit7);
+        digitToTexture.Add('8', digit8);
+        digitToTexture.Add('9', digit9);
     }
 
     public void Init() {
@@ -34,10 +63,27 @@ public class Screen : MonoBehaviour {
         }
     }
 
+    public void DrawDigits(int num, int x, int y) {
+        string numStr = num.ToString();
+        Debug.Log("Drawing digits: " + numStr);
+        for (int i = 0; i < numStr.Length; i++) {
+            if (digitToTexture == null || !digitToTexture.ContainsKey(numStr[i])) SetupDigitArray();
+            LoadSmall(digitToTexture[numStr[i]], x + i * 4, y);
+        }
+    }
+
     public void Load(Texture2D input) {
         for (int x = 0; x < input.width; x++) {
             for (int y = 0; y < input.height; y++) {
                 SetPixelColor(x, y, input.GetPixel(x, y));
+            }
+        }
+    }
+
+    public void LoadSmall(Texture2D input, int startX, int startY) {
+        for (int x = 0; x < input.width; x++) {
+            for (int y = 0; y < input.height; y++) {
+                SetPixelColor(startX + x, startY + y, input.GetPixel(x, y));
             }
         }
     }

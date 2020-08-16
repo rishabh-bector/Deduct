@@ -13,11 +13,12 @@ public class InstructionMenu : MonoBehaviour, PixelParent {
     // References
     public Screen screen;
     public Selector selector;
+    public Selector functionSelector;
     public LevelManager levelManager;
     public Board board;
 
     // State
-    public int numInstructions = 7;
+    public int numInstructions = 8;
     public int lastXPos = -1;
     public Function parent;
     public Dictionary<Instructions, Color> instColors;
@@ -38,6 +39,7 @@ public class InstructionMenu : MonoBehaviour, PixelParent {
         instColors.Add(Instructions.Function3, board.f3Color);
         instColors.Add(Instructions.Function4, board.f4Color);
         instColors.Add(Instructions.Function5, board.f5Color);
+        instColors.Add(Instructions.None, board.viewBackgroundColor);
     }
 
     public void DestroySetMenu() {
@@ -101,8 +103,6 @@ public class InstructionMenu : MonoBehaviour, PixelParent {
             screen.SetPixelParent(x + xPos, row - 1, i, 0, this);
             screen.SetPixelParent(x + xPos + 1, row - 1, i, 0, this);
 
-            Debug.Log("Set parent for " + i + " at " + x + xPos + " " + row);
-
             oldSet.Add((x + xPos, row));
             oldSet.Add((x + xPos + 1, row));
             oldSet.Add((x + xPos, row - 1));
@@ -131,5 +131,23 @@ public class InstructionMenu : MonoBehaviour, PixelParent {
 
     public void OnPixelMouseDown(int x, int y) {
         parent.OnInstructionSelect((Instructions)x);
+
+        // Save player's code whenever they edit it
+        int xPos = functionSelector.selectX;
+        int yPos = functionSelector.selectY;
+        int slot = screen.PixelAt(xPos, yPos).GetComponent<Pixel>().ptag;
+       
+        levelManager.Get(levelManager.currentLevel).SetInstruction(PosToFunc(xPos), slot - 1, x);
+        levelManager.Save();
+    }
+
+    public int PosToFunc(int xPos) {
+        int func = 0;
+        if (xPos >= 2 + 13 * 4) func = 4;
+        else if (xPos >= 2 + 13 * 3) func = 3;
+        else if (xPos >= 2 + 13 * 2) func = 2;
+        else if (xPos >= 2 + 13) func = 1;
+        else if (xPos >= 2 + 13) func = 0;
+        return func;
     }
 }

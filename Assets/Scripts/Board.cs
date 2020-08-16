@@ -44,7 +44,7 @@ public class Board : MonoBehaviour, PixelParent {
     private int levelSelect = 0;
 
     private void Start() {
-        TransitionToTitleState();
+        TransitionToTitleState();       
     }
 
     // ----------------------------------------
@@ -161,7 +161,7 @@ public class Board : MonoBehaviour, PixelParent {
             }
         }
 
-        screen.SetPixelsParent(24, 27, 17, 10, 24, 28, this);
+        screen.SetPixelsParent(24, 27, 17, 10, 24, 31, this);
     }
 
     public List<List<Instructions>> BuildInstructionList() {
@@ -202,25 +202,38 @@ public class Board : MonoBehaviour, PixelParent {
     public void OnPixelMouseExit(int x, int y) { }
 
     public void OnPixelMouseDown(int x, int y) {
-        if (y == 28) TransitionToLevelState();
-        if(y == 57) TransitionToTitleState();
-        if (y == 24) TransitionToGameState();
+        if (y == 28 || y == 31) {
+            audioManager.PlayClick();
+            TransitionToLevelState();
+        }
+        if (y == 57) {
+            audioManager.PlayClick();
+            TransitionToTitleState();
+        }
+        if (y == 24) {
+            audioManager.PlayClick();
+            TransitionToGameState();
+        }
 
         if (y == 18) {
+            audioManager.PlayClick();
             Debug.Log("Quitting...");
             Application.Quit();
         }
         if (y == 2) {
+            audioManager.PlayClick();
             Debug.Log("Opening URL...");
-            Application.OpenURL("https://github.com/rishabh-bector");
+            Application.OpenURL("https://github.com/rishabh-bector/digicode");
         }
 
         if (x == 55 && y == 37) {
+            audioManager.PlayClick();
             if (levelManager.Get(levelSelect + 1) != null) if (levelManager.Get(levelSelect + 1).unlocked) levelSelect++;
             if (levelSelect > 10) levelSelect = 10;
             BuildLevelBar();
         }
         if (x == 4 && y == 37) {
+            audioManager.PlayClick();
             levelSelect--;
             if (levelSelect < 0) levelSelect = 0;
             BuildLevelBar();
@@ -232,9 +245,10 @@ public class Board : MonoBehaviour, PixelParent {
     // ----------------------------------------
 
     public void TransitionToLevelState() {
+        audioManager.PlayClick();
+        functionSelector.Reset();
         screen.Init();
         dashEffect.STOP();
-        functionSelector.Reset();
         BuildLevelView();
     }
 
@@ -245,8 +259,8 @@ public class Board : MonoBehaviour, PixelParent {
     }
 
     public void TransitionToTitleState() {
-        screen.Init();
         functionSelector.Reset();
+        screen.Init();
         dashEffect.START();
         BuildTitle();
     }
@@ -255,6 +269,7 @@ public class Board : MonoBehaviour, PixelParent {
         screen.Init();
         dashEffect.STOP();
         BuildSuccessView();
-        audioManager.StartSlow();
+        screen.DrawDigits(levelManager.finalScore, 40, 17);
+        screen.DrawDigits(levelManager.bestScore, 40, 8);
     }
 }
