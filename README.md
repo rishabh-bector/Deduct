@@ -18,7 +18,7 @@ Your task is to guide the drone to the target. However, you are a highly intelli
 
 ![](https://github.com/rishabh-bector/Digicode/blob/master/Assets/Screenshots/control.png)
   
-Each 3x5 color-coded group of slots is a _function_. Each function contains 15 slots, and each slot can hold 1 instruction. The start button is the green one. Next to it is the stop button, which will stop your program and reset the drone. Your task is to guide your drone to the target by placing instructions into these slots. Clicking on a slot will open the instruction menu, which displays all available instructions. As you can see, you have 5 functions available to you:
+Each 3x5 color-coded group of slots is a _function_. Each function contains 15 slots, and each slot can hold 1 instruction. The start button is the green one. Next to it is the stop button, which will stop your program and reset the drone. Your task is to guide your drone to the target by placing instructions into these slots. Clicking on a slot will open the instruction menu, which displays all available instructions. As you can see, there are 7 functions available to you:
 
 ![](https://github.com/rishabh-bector/Digicode/blob/master/Assets/Screenshots/instructionmenu.png)
   
